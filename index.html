@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,6 +36,7 @@
             return [Math.floor(Math.random() * (screen.width-100 - 0) + 0), Math.floor(Math.random() * (screen.height-100 - 0) + 0)]
         }
 
+	// nerd math 🤓
         setInterval(()=>{
             if (popups.length!=0){
                 for (let i = 0; i < popups.length;i++){
@@ -43,7 +45,7 @@
                     popups[i].focus()
                 }
             }
-        }, 50)/*make this lower later*/
+        }, 50)
 
         setInterval(()=>{
             title.textContent = wordlist[indexN]
@@ -59,6 +61,7 @@
             }
         }, 400)
 
+	// computer destruction
         function createNewPopUp(){
             let newWindow = window.open('index.html','', 'width=350px height=200px')
             popups.push(newWindow)
@@ -72,7 +75,8 @@
             e.preventDefault()
             e.returnValue = ''
         })
-        
+
+	// stop resisting!
         window.addEventListener('load', ()=>{
             let h = window.innerHeight
             title.style.marginTop = (h/2 - 120).toString() + "px"
@@ -83,6 +87,7 @@
             title.style.marginTop = (h/2 - 120).toString() + "px"
         })
 
+	// ear destruction
         document.addEventListener('click', ()=>{
             music.play()
         })
@@ -91,7 +96,8 @@
             music.play()
         })
 
-        document.addEventListener('keydown', (e)=>{
+        // computer destruction
+	document.addEventListener('keydown', (e)=>{
             music.play()
             for (let i = 0; i<20; i++){
                 createNewPopUp()
@@ -106,12 +112,11 @@
             }
             e.preventDefault()
         })
-
+	    
+	// ear destruction
         music.addEventListener('ended', ()=>{
             music.play()
         })
-
-        
     </script>
 </body>
 </html>
