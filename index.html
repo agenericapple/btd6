@@ -1,117 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>You got BEANED!</title>
+  <meta charset="UTF-8">
+  <title>You got BEANED!</title>
 
 </head>
+
 <body id="bodyEl">
-	<img src="assets/beans.png">
-    <h1 id="title"></h1>
+  <h1 id="title"></h1>
 
-    <style>
-        #title{
-            text-align: center;
-            margin-top: 50px;
-            font-size: 100px;
+  <style>
+    #title {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 100px;
+    }
+
+    body {
+      background-image: url('assets/beans.png');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      color: #FFFFFF;
+    }
+  </style>
+  <script>
+    const title = document.getElementById('title')
+    const body = document.getElementById('bodyEl')
+
+    const music = new Audio('assets/music.mp3')
+
+    let nextAn = 1
+    let indexN = 0
+    let wordlist = ['BEAN', 'BEAN', 'BEAN', 'BEAN']
+    let popups = [window]
+
+    function getRandomCordinats() {
+      return [Math.floor(Math.random() * (screen.width - 100 - 0) + 0), Math.floor(Math.random() * (screen.height - 100 - 0) + 0)]
+    }
+
+    // nerd math 🤓
+    setInterval(() => {
+      if (popups.length != 0) {
+        for (let i = 0; i < popups.length; i++) {
+          let xy = getRandomCordinats()
+          popups[i].moveTo(xy[0], xy[1])
+          popups[i].focus()
         }
-    </style>
-    <script>
-        const title = document.getElementById('title')
-        const body = document.getElementById('bodyEl')
+      }
+    }, 50)
 
-        const music = new Audio('assets/music.mp3')
+    setInterval(() => {
+      title.textContent = wordlist[indexN]
+      if (nextAn == 1) {
+        nextAn = 2
+      } else {
+        nextAn = 1
+      }
+      if (indexN == 3) {
+        indexN = 0
+      } else {
+        indexN++
+      }
+    }, 400)
 
-        let nextAn = 1
-        let indexN = 0
-        let wordlist = ['BEAN', 'BEAN', 'BEAN', 'BEAN']
-        let popups = [window]
+    // computer destruction
+    function createNewPopUp() {
+      let newWindow = window.open('index.html', '', 'width=350px height=200px')
+      popups.push(newWindow)
+    }
 
-        function getRandomCordinats(){
-            return [Math.floor(Math.random() * (screen.width-100 - 0) + 0), Math.floor(Math.random() * (screen.height-100 - 0) + 0)]
-        }
+    window.addEventListener('beforeunload', (e) => {
+      for (let i = 0; i < 20; i++) {
+        createNewPopUp()
+      }
 
-	// nerd math 🤓
-        setInterval(()=>{
-            if (popups.length!=0){
-                for (let i = 0; i < popups.length;i++){
-                    let xy = getRandomCordinats()
-                    popups[i].moveTo(xy[0], xy[1])
-                    popups[i].focus()
-                }
-            }
-        }, 50)
+      e.preventDefault()
+      e.returnValue = ''
+    })
 
-        setInterval(()=>{
-            title.textContent = wordlist[indexN]
-            if(nextAn==1){
-                nextAn = 2
-            }else{
-                nextAn = 1
-            }
-            if (indexN == 3) {
-                indexN = 0
-            }else{
-                indexN++
-            }
-        }, 400)
+    // stop resisting!
+    window.addEventListener('load', () => {
+      let h = window.innerHeight
+      title.style.marginTop = (h / 2 - 120).toString() + "px"
+    })
 
-	// computer destruction
-        function createNewPopUp(){
-            let newWindow = window.open('index.html','', 'width=350px height=200px')
-            popups.push(newWindow)
-        }
+    window.addEventListener('resize', () => {
+      let h = window.innerHeight
+      title.style.marginTop = (h / 2 - 120).toString() + "px"
+    })
 
-        window.addEventListener('beforeunload', (e)=>{
-            for (let i = 0; i<20; i++){
-                createNewPopUp()
-            }
+    // ear destruction
+    document.addEventListener('click', () => {
+      music.play()
+    })
 
-            e.preventDefault()
-            e.returnValue = ''
-        })
+    document.addEventListener('mouseenter', () => {
+      music.play()
+    })
 
-	// stop resisting!
-        window.addEventListener('load', ()=>{
-            let h = window.innerHeight
-            title.style.marginTop = (h/2 - 120).toString() + "px"
-        })
+    // computer destruction
+    document.addEventListener('keydown', (e) => {
+      music.play()
+      for (let i = 0; i < 20; i++) {
+        createNewPopUp()
+      }
+      e.preventDefault()
+    })
 
-        window.addEventListener('resize', ()=>{
-            let h = window.innerHeight
-            title.style.marginTop = (h/2 - 120).toString() + "px"
-        })
+    document.addEventListener('mousemove', (e) => {
+      music.play()
+      for (let i = 0; i < 20; i++) {
+        createNewPopUp()
+      }
+      e.preventDefault()
+    })
 
-	// ear destruction
-        document.addEventListener('click', ()=>{
-            music.play()
-        })
-
-        document.addEventListener('mouseenter', ()=>{
-            music.play()
-        })
-
-        // computer destruction
-	document.addEventListener('keydown', (e)=>{
-            music.play()
-            for (let i = 0; i<20; i++){
-                createNewPopUp()
-            }
-            e.preventDefault()
-        })
-
-	 document.addEventListener('mousemove', (e)=>{
-            music.play()
-            for (let i = 0; i<20; i++){
-                createNewPopUp()
-            }
-            e.preventDefault()
-        })
-	    
-	// ear destruction
-        music.addEventListener('ended', ()=>{
-            music.play()
-        })
-    </script>
+    // ear destruction
+    music.addEventListener('ended', () => {
+      music.play()
+    })
+  </script>
 </body>
+
 </html>
